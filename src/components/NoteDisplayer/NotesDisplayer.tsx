@@ -1,44 +1,33 @@
-import "./styles.css";
-import { useState } from "react";
-import { FaThumbtack } from "react-icons/fa";
-import { MdColorLens, MdDelete } from "react-icons/md";
-import { useDispatch } from "react-redux";
-import { colorChange, deleteNote, Note, togglePin } from "../../store";
-import ColorPalette from "../commmon/ColorPallete/ColorPalette";
+import './styles.css'
+import { Note } from "../../store";
+import Notes from "../Notes/Notes";
 
-const Notes: React.FC<Note> = ({ id, title, content, pinned, image, color = "" }) => {
-    const dispatch = useDispatch();
+interface NotesDisplayerProps {
+    notes: Note[];
+    notesType: string;
+}
 
-    const [background, setBackground] = useState(color);
-    const [showColorPalette, setShowColorPalette] = useState(false);
-
-    const handleColorSelect = (color: string) => {
-        dispatch(colorChange({ id, color }))
-        setBackground(color);
-        setShowColorPalette(false);
-    };
-
-    return (
-        <div className="note-container" style={{ background: background }}>
-            <FaThumbtack className={`pin-icon ${pinned ? 'pinned' : ''}`} onClick={() => dispatch(togglePin({ id, pinValue: !pinned }))} />
-            
-            <div className="note-title">{title}</div>
-            <div className="note-content">{content}</div>
+const NotesDisplayer: React.FC<NotesDisplayerProps> = ({ notes, notesType }) => {
+    return <>
+        {notesType ? <div className="tagname">{notesType}</div> : null}
+        <div className="notes-container">
             {
-                image &&
-                <img src={image} alt="" />
+                notes.map((val: Note) => {
+                    return (
+                        <Notes
+                            key={val.id}
+                            id={val.id}
+                            color={val.color}
+                            title={val.title || ""}
+                            image={val.image}
+                            content={val.content}
+                            pinned={val.pinned}
+                        />
+                    );
+                })
             }
-
-            <div className="note-actions">
-                <div className="note-icons">
-                    <MdColorLens className="note-icon" onClick={() => setShowColorPalette(pre => !pre)}/>
-                    {showColorPalette && <ColorPalette styles={{ "right": 0 }} handleColorSelect={handleColorSelect} />}
-
-                    <MdDelete onClick={() => dispatch(deleteNote(id))} className="note-icon" />
-                </div>
-            </div>
         </div>
-    );
-};
+    </>
+}
 
-export default Notes;
+export default NotesDisplayer
