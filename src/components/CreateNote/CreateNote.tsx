@@ -89,6 +89,11 @@ const CreateNote: React.FC = () => {
         </textarea>
 
         {
+          currentData?.image.trim() &&
+          <img className='attached-image' src={currentData?.image} />
+        }
+
+        {
           expand &&
           <div className="create-note-actions">
             <div className="create-note-icons">

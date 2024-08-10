@@ -22,6 +22,13 @@
     color: #9ca3af
 }
 
+.attached-image{
+    width: 250px;
+    height: 150px;
+    object-fit: cover;
+
+}
+
 .pinned {
     display: flex;
     color: black;
@@ -54,8 +61,9 @@
 .create-note-actions {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    padding-top: 1rem;
     align-items: center;
+    justify-content: space-between;
 }
 
 
@@ -78,10 +86,20 @@
 
 .create-note-close {
     width: 4rem;
-    color: #414247;
-    font-weight: 500;
+    height: 2rem;
+    color: #1d2030;
+    font-weight: bold;
     text-align: center;
     cursor: pointer;
+    background-color: #a6aed3;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.create-note-close:hover{
+    background-color: #8693d4;
 }
 
 .color-swatch:hover {
