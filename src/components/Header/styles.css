@@ -1,0 +1,14 @@
+.header-container {
+    height: 2.8rem;
+    display: flex;
+    align-items: center;
+    background-color: #f59e0b;
+}
+
+.header-text {
+    color: white;
+    font-size: 1.2rem;
+    font-family: monospace;
+    padding-left: 1.25rem;
+
+}
